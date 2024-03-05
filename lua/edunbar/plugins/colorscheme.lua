@@ -1,7 +1,5 @@
 return{
-   --'AlexvZyl/nordic.nvim',
-   --"nyoom-engineering/oxocarbon.nvim",
---	name = "oxocarbon",
+-- 256 color theme for use in default MacOS terminal
 "jdsimcoe/abstract.vim",
 	name='abstract',
    config = function()
