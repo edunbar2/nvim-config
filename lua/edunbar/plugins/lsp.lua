@@ -25,8 +25,10 @@ local lspconfig = require('lspconfig')
                 "lua_ls",
                 "rust_analyzer",
 		"powershell_es",
---		"bashls",
---		"ansiblels",
+		"bashls",
+		"ansiblels",
+		"pyright",
+		"tsserver",
             }
 			})
 
