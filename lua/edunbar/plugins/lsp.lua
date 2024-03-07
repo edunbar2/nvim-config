@@ -1,3 +1,14 @@
+local lsp_servers = {
+                "lua_ls",
+                "rust_analyzer",
+                "powershell_es",
+                "bashls",
+                "ansiblels",
+                "pyright",
+                "tsserver",
+                "marksman",
+            }
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -14,26 +25,18 @@ return {
     },
 
     config = function()
-	-- Add additional capabilities supported by nvim-cmp
+        -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require('lspconfig')
-		 require("fidget").setup({})
+                 require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "rust_analyzer",
-		"powershell_es",
-		"bashls",
-		"ansiblels",
-		"pyright",
-		"tsserver",
-            }
-			})
+            ensure_installed = lsp_servers
+        })
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', }
+local servers = lsp_servers
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -41,7 +44,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-		 -- configure lua server (with special settings)
+                 -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
@@ -63,8 +66,8 @@ end
     })
 
     lspconfig["pyright"].setup({
-	capabilities = capabilities,
-	filetypes = {"python"},
+        capabilities = capabilities,
+        filetypes = {"python"},
     })
 
 -- luasnip setup
@@ -114,4 +117,3 @@ cmp.setup {
 }
     end
 }
-
